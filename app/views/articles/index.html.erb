@@ -1,0 +1,32 @@
+<h1> All Articles </h1>
+<% if Article.count == 0 %>
+	<h3>No Articles</h3>
+<%end%>
+
+<table id ="articles">
+	<tr>
+		
+			<th><h3>Title </h3></th>
+			<th><h3> Body </h3></th>
+			<th><h3>Tags </h3></th>
+	</tr>
+	<% @articles.each do |article| %>
+		<tr>
+			<td>
+				<%= link_to article.title, article_path(article)%>
+			</td>
+			<td>
+				<% body = article.body.slice(0..25) %>
+				<% if body != article.body %>
+					<%body << "..." %>
+				<%end%>
+				<%=body%>
+			</td>
+			<td>
+				<%=article.tags.join(", ") %>
+			</td>
+		</tr>
+	<%end%>
+</table>
+<%= link_to "Create a new Article", new_article_path, class: "new_article" %><br/><br/>
+<%= link_to "View all/edit tags", tags_path %>

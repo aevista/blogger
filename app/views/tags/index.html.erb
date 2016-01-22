@@ -1,0 +1,19 @@
+<h1> All Tags</h1>
+<% if Tag.count == 0 %>
+	<h3>No Tags</h3>
+<%end%>
+<% @tags.each do |tag| %>
+	<ul>
+		<%=link_to "delete", tag_path(tag), method: :delete %> <br/>
+		<h3><%=tag.name %></h3>
+		
+		<%tag.articles.each do |article| %>
+			<li style ="text-indent: 10px"><%=link_to article.title, article_path(article)%></li>
+		<%end%>
+		
+	</ul>
+	<p>_____________________<p>
+<%end%>
+<br/>
+
+<%= link_to "<< Back to Article List", articles_path %>
